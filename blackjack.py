@@ -46,20 +46,26 @@ def total_score(cards):
 
 def show_hands(your_cards, house_cards, your_total, house_total):
     """Prints final hand results"""
+    text = f'''
+    Your final hand: {your_cards}, final score: {your_total}\n
+    House's final hand: {house_cards}, final score: {house_total}\n
+    '''
+
     if your_total == 0 and house_total == 0:
-        print(f"-> Your final hand: {your_cards}, final score: 21")
-        print(f"-> House's final hand: {house_cards}, final score: 21")
-        print("---> PUSH - draw. 😐")
+        your_total = 21
+        house_total = 21
+        print(text)
+        print("--> PUSH - draw. 😐")
         return True
     if your_total == 0:
-        print(f"-> Your final hand: {your_cards}, final score: 21")
-        print(f"-> House's final hand: {house_cards}, final score: {house_total}")
-        print ("---> You have BlackJack! You WIN. 😃")   
+        your_total = 21
+        print(text)
+        print ("--> You have BlackJack! You WIN. 😃")   
         return True
     if house_total == 0:
-        print(f"-> Your final hand: {your_cards}, final score: {your_total}")
-        print(f"-> House's final hand: {house_cards}, final score: 21")
-        print("---> House has BlackJack! You LOSE. 😥")
+        house_total = 21
+        print(text)
+        print("--> House has BlackJack! You LOSE. 😥")
         return True
 
 def check_for_blackjack(your_cards, house_cards, your_total, house_total):
@@ -77,7 +83,7 @@ def compare(your_total, house_total):
     elif house_total > 21:
         print ("---> You WIN! 😃\n")
     elif your_total > 21:
-        print ("---> You LOSE! 😃\n")
+        print ("---> You LOSE! 😥\n")
     elif your_total > house_total:
         print("---> You WIN! 😃\n")
     else:
@@ -85,8 +91,11 @@ def compare(your_total, house_total):
 
 def end_game(your_cards, house_cards, your_total, house_total):
     """Prints final hand results."""
-    print(f"-> Your final hand: {your_cards}, final score: {your_total}")
-    print(f"-> House's final hand: {house_cards}, final score: {house_total}")
+    text = f'''
+    Your final hand: {your_cards}, final score: {your_total}\n
+    House's final hand: {house_cards}, final score: {house_total}\n
+    '''
+    print(text)
     compare(your_total, house_total)
 
 
@@ -113,8 +122,11 @@ def start_new_game():
 
     while should_continue == True:
         
-        print(f"-> Your cards: {your_cards}, current score: {your_total}")
-        print(f"-> House's first card: [{house_cards[0]}, ?]\n")
+        text = f'''
+        Your cards: {your_cards}, current score: {your_total}\n
+        House's first card: [{house_cards[0]}, ?]\n
+        '''
+        print(text)
 
         if input("Type 'y' to HIT, type 'n' to STAND: ") == 'y':
             your_cards.append(get_card())
